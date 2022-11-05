@@ -5,7 +5,7 @@
     a. Update a list of packages in package manager
 
    - `sudo apt update`
-     ![alt text](/dareyio-pbl/projectPictures/step1_p1.JPG)
+     ![step1](./dareyio-pbl/projectPictures/step1_p1.JPG)
 
     b. Install Apache
    - `sudo apt install apache2`
