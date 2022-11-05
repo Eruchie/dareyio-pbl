@@ -181,4 +181,4 @@
 
    - `http://18.223.23.80` and `http://ec2-18-223-23-80.us-east-2.compute.amazonaws.com/`
 
-     ![step26](./projectPictures/step25_p1.JPG)
+     ![step26](./projectPictures/step26_p1.JPG)
