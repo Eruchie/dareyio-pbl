@@ -39,7 +39,7 @@
 
     b. Log into mysql console
 
-   - `sudo mysql-server`
+   - `sudo mysql`
      
      ![step1](./projectPictures/step7_p1.JPG)
 
