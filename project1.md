@@ -2,64 +2,78 @@
 
 1. **Installing Apache and updating the firewall**: After creating and logging into my instance via ssh, I ran the following commands:
 
-    a. Update a list of packages in package manager
+   a. Update a list of packages in package manager
 
    - `sudo apt update`
-     
+
      ![step1](./projectPictures/step1_p1.JPG)
 
-    b. Install Apache
-   - `sudo apt install apache2`
-     
-      ![alt text](./projectPictures/step2_p1.JPG)
+   b. Install Apache
 
-    c. Verify the status of Apache2 to see if it is running.
+   - `sudo apt install apache2`
+
+     ![alt text](./projectPictures/step2_p1.JPG)
+
+   c. Verify the status of Apache2 to see if it is running.
+
    - `sudo systemctl status apache2`
-   
-      ![alt text](./projectPictures/step3_p1.JPG)
+
+     ![alt text](./projectPictures/step3_p1.JPG)
 
    d. Check local access to web through the local host
+
    - `curl http://localhost:80`
-  
-      ![alt text](./projectPictures/step4_p1.JPG)
+
+     ![alt text](./projectPictures/step4_p1.JPG)
 
    e. Check web access from internet through the firewall
 
    - `http://3.22.169.27:80`
 
-      ![alt text](./projectPictures/step5_p1.JPG)
+     ![alt text](./projectPictures/step5_p1.JPG)
 
 1. **Installing mysql**: After installing Apache, install mysql to be able to store and manage data for your site in a relational database:
 
-    a. Install mysql
+   a. Install mysql
 
    - `sudo apt install mysql-server`
-     
-     ![step1](./projectPictures/step6_p1.JPG)
 
-    b. Log into mysql console
+     ![step6](./projectPictures/step6_p1.JPG)
+
+   b. Log into mysql console
 
    - `sudo mysql`
-     
-     ![step1](./projectPictures/step7_p1.JPG)
+
+     ![step7](./projectPictures/step7_p1.JPG)
 
    c. Run a script to remove some insecure default settings. Set user’s password as PassWord.1.
 
    - `ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';`
-     
-     ![step1](./projectPictures/step8_p1.JPG)
+
+     ![step8](./projectPictures/step8_p1.JPG)
 
    d. Start the interactive script by running the command below
 
    - `sudo mysql_secure_installation`
-     
-     ![step1](./projectPictures/step8_p1.JPG)
 
+     ![step9](./projectPictures/step9_p1.JPG)
 
+   e. Test login to mysql-server using the command below
 
+   - `sudo mysql -p`
 
+     ![step10](./projectPictures/step10_p1.JPG)
 
+1. **Installing php**: After installing Apache to serve your content and MySql installed to store and manage data, install php which is the componet required to process code to display dynamic content to the end user.
 
+   a. Install the dependencies required for php to communicate with mysql and apache
 
+   - `sudo apt install php libapache2-mod-php php-mysql`
 
+     ![step11](./projectPictures/step11_p1.JPG)
 
+    b. Confirm php version
+
+   - `php -v`
+
+     ![step12](./projectPictures/step12_p1.JPG)
