@@ -9,7 +9,7 @@
 
     b. Install Apache
    - `sudo apt install apache2`
-     ![alt text](/dareyio-pbl/projectPictures/step2_p1.JPG)
+     ![alt text](/https://github.com/Eruchie/dareyio-pbl/blob/main/dareyio-pbl/projectPictures/step2_p1.JPG)
 
     c. Verify the status of Apache2 to see if it is running.
    - `sudo systemctl status apache2`
