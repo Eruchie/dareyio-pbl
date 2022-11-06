@@ -6,28 +6,28 @@
 
    - `sudo apt update`
 
-     ![step1](./project2/step1_p2.JPG)
+     ![step1](./projectPictures/step1_p2.JPG)
 
    b. Install NGINX
 
    - `sudo apt install nginx`
 
-     ![alt text](./project2/step2_p2.JPG)
+     ![alt text](./projectPictures/step2_p2.JPG)
 
    c. Verify the status of Apache2 to see if it is running.
 
    - `sudo systemctl status nginx`
 
-     ![step3](./project2/step3_p2.JPG)
+     ![step3](./projectPictures/step3_p2.JPG)
 
    d. Check local access to web through the local host
 
    - `curl http://localhost:80`
 
-     ![step4](./project2/step4_p2.JPG)
+     ![step4](./projectPictures/step4_p2.JPG)
 
    e. Check web access from internet through the firewall
 
    - `http://3.138.188.10:80`
 
-     ![step5](./project2/step5_p2.JPG)
+     ![step5](./projectPictures/step5_p2.JPG)
