@@ -24,13 +24,13 @@
 
    - `curl http://localhost:80`
 
-     ![step4](./projectPictures/step4_p2.JPG)
+     ![step4](./projectPictures/step4_p2.jpg)
 
    e. Check web access from internet through the firewall
 
    - `http://3.138.188.10:80`
 
-     ![step5](./projectPictures/step5_p2.JPG)
+     ![step5](./projectPictures/step5_p2.jpg)
 
 1. **Installing mysql**: After installing Apache, install mysql to be able to store and manage data for your site in a relational database:
 
