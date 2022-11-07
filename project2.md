@@ -58,8 +58,22 @@
 
      ![step9](./projectPictures/step9_p1.JPG)
 
-   e. Test login to mysql-server using the command below
+   e. Test login to mysql-server using the command below (enter the new password)
 
    - `sudo mysql -p`
 
      ![step10](./projectPictures/step10_p1.JPG)
+
+1. **Install php**: After installing Apache to serve your content and MySql installed to store and manage data, install php which is the componet required to process code to display dynamic content to the end user.
+
+   a. Install the dependencies required for php to communicate with mysql and apache
+
+   - `sudo apt install php-fpm php-mysql`
+
+     ![step11](./projectPictures/step11_p2.JPG)
+
+    b. Confirm php version
+
+   - `php -v`
+
+     ![step12](./projectPictures/step12_p1.JPG)
