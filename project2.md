@@ -72,8 +72,66 @@
 
      ![step11](./projectPictures/step11_p2.JPG)
 
-    b. Confirm php version
+1. **Configuring NGINX to use PHP processor**: When using the Nginx web server, we can create server blocks (similar to virtual hosts in Apache) to encapsulate configuration details and host more than one domain on a single server. We will use aufora as the domain name.
 
-   - `php -v`
+   a. Create directory structure for `aufora` website using 'mkdir' command as follows
 
-     ![step12](./projectPictures/step12_p1.JPG)
+   - `sudo mkdir /var/www/aufora`
+
+     ![step12](./projectPictures/step13_p2.JPG)
+
+   b. Assign ownership of directory with the current  using `$USER` which will reference the current system user.
+
+   - `sudo chown -R $USER:$USER /var/www/aufora`
+
+     ![step13](./projectPictures/step14_p2.JPG)
+
+   c. Create and open a new config file in nginx's `sites available` directory using nano editor
+
+   - `sudo nano /etc/nginx/sites-available/aufora`
+
+   - Paste the folowing in the snippet below
+
+     ![step14](./projectPictures/step15_p2.JPG)
+
+   d. Activate your configuration by linking to the config file from Nginx’s `sites-enabled` directory
+
+   - `sudo ln -s /etc/nginx/sites-available/aufora /etc/nginx/sites-enabled/`
+
+     ![step15](./projectPictures/step16_p2.JPG)
+
+   e. Test the configuration for syntax errors 
+
+   - `sudo unlink /etc/nginx/sites-enabled/default`
+
+     ![step16](./projectPictures/step17_p2.JPG)
+
+   f. Disable the default nginx host that is currently configured to listen on port 80 
+
+   - `sudo nginx -t`
+
+     ![step17](./projectPictures/step18_p2.JPG)
+
+   g. Reload nginx to apply changes 
+
+   - `sudo systemctl reload nginx`
+
+     ![step18](./projectPictures/step19_p2.JPG)
+
+   h. Create an `index.html` file in the web root location `/var/www/aufora` so that we can test if the new server block works as expected 
+
+   - `sudo echo 'Hello LEMP from AUFORA' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/aufora/index.html`
+
+     ![step19](./projectPictures/step20_p2.JPG)
+
+   i. Launch the new website using the public IP
+
+   - `http://3.145.13.48`
+
+     ![step20](./projectPictures/step21_p2.JPG)
+
+   j. Launch the new website using the public DNS
+
+   - `http://ec2-3-145-13-48.us-east-2.compute.amazonaws.com/`
+
+     ![step21](./projectPictures/step22_p2.JPG)
