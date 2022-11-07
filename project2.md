@@ -135,3 +135,21 @@
    - `http://ec2-3-145-13-48.us-east-2.compute.amazonaws.com/`
 
      ![step21](./projectPictures/step22_p2.JPG)
+
+1. **Testing PHP with nginx**: The LEMP stack is completely installed and fully operational.
+
+   a. Test the LEMP stack to validate nginx can correctly hand `.php` files off to the PHP processor. This can be done by creating a test PHP file in your document root. Open a new file called `info.php` within the document root using the text editor
+
+   - `sudo nano /var/www/aufora/info.php`
+   - Paste the code from the below snippet 
+
+     ![step22](./projectPictures/step23_p2.JPG)
+
+   b. Access the page from a web browser via the domain name or public IP address set up in your nginx configuration file, followed by /`info.php`:
+
+   - `http://18.117.109.175`
+  
+     ![step23](./projectPictures/step24_p2.JPG)
+
+
+
