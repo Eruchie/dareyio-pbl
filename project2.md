@@ -31,3 +31,35 @@
    - `http://3.138.188.10:80`
 
      ![step5](./projectPictures/step5_p2.JPG)
+
+1. **Installing mysql**: After installing Apache, install mysql to be able to store and manage data for your site in a relational database:
+
+   a. Install mysql
+
+   - `sudo apt install mysql-server`
+
+     ![step6](./projectPictures/step6_p1.JPG)
+
+   b. Log into mysql console
+
+   - `sudo mysql`
+
+     ![step7](./projectPictures/step7_p1.JPG)
+
+   c. Run a script to remove some insecure default settings. Set user’s password as PassWord.1.
+
+   - `ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';`
+
+     ![step8](./projectPictures/step8_p1.JPG)
+
+   d. Start the interactive script by running the command below
+
+   - `sudo mysql_secure_installation`
+
+     ![step9](./projectPictures/step9_p1.JPG)
+
+   e. Test login to mysql-server using the command below
+
+   - `sudo mysql -p`
+
+     ![step10](./projectPictures/step10_p1.JPG)
