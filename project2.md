@@ -6,7 +6,7 @@
 
    - `sudo apt update`
 
-     ![step1](./projectPictures/stepOne_p2.JPG)
+     ![step1](./projectPictures/step1_p2.JPG)
 
    b. Install NGINX
 
