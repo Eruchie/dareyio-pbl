@@ -177,3 +177,56 @@
    - `CREATE USER 'aufora_user'@'%' IDENTIFIED WITH mysql_native_password BY 'P@ssw0rd';`
    
      ![step27](./projectPictures/step28_p2.JPG)
+
+   c. Grant aufora_user user full privileges over aufora_database database, while preventing the user from creating or modifying other databases on your server. 
+   - `GRANT ALL ON aufora_database.* TO 'aufora_user'@'%';`
+   
+     ![step28](./projectPictures/step29_p2.JPG)
+
+   d. Test if the new user has the proper permissions by logging in to the MySQL console again, this time using the custom user credentials. 
+   - `sudo mysql -u aufora_user -p`
+   
+     ![step29](./projectPictures/step30_p2.JPG)
+
+   e. Confirm access to the aufora_database database. 
+   - `SHOW DATABASES;`
+   
+     ![step30](./projectPictures/step31_p2.JPG)
+
+   f. Create a test table named `todo_list`. From MySQL console, run the following statement:
+   
+     ![step31](./projectPictures/step32_p2.JPG)
+
+   g. Insert a few rows of content in the test table. Repeat the next command a few times, using different VALUES 
+   - `INSERT INTO aufora_database.todo_list (content) VALUES ("My first DevOps Project");`
+
+    - `INSERT INTO aufora_database.todo_list (content) VALUES ("Practicing to become a Devops Engineer");`
+
+     - `INSERT INTO aufora_database.todo_list (content) VALUES ("Putting in effort to improve in my DevOps skills");`
+      - `INSERT INTO aufora_database.todo_list (content) VALUES ("Timeline of 3months to acheive this feat");`
+
+    h. Confirm the data was successfully saved into the table
+
+   - `SELECT * FROM aufora_database.todo_list;`
+
+     ![step32](./projectPictures/step33_p2.JPG)
+
+   i. Now create a PHP script that will connect to MySQL and query for content. Create a new PHP file in the custom web root directory using nano editor.
+
+   - `sudo nano /var/www/aufora/todo_list.php`
+
+   - Copy the script in the snippet below abd paste in `todo_list.php` script
+
+     ![step33](./projectPictures/step34_p2.JPG)
+
+   j. Access the new page in the web browser by visiting the domain name or public IP address configured for the website, followed by `/todo_list.php`.
+
+   - `http://3.21.168.55/todo_list.php`
+
+   - Copy the script in the snippet below abd paste in `todo_list.php` script
+
+     ![step34](./projectPictures/step35_p2.JPG)
+
+
+
+
