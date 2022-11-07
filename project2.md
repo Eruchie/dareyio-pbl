@@ -12,13 +12,13 @@
 
    - `sudo apt install nginx`
 
-     ![alt text](./projectPictures/step2_p2.JPG)
+     ![alt text](./projectPictures/step2_p2.jpg)
 
    c. Verify the status of Apache2 to see if it is running.
 
    - `sudo systemctl status nginx`
 
-     ![step3](./projectPictures/step3_p2.JPG)
+     ![step3](./projectPictures/step3_p2.jpg)
 
    d. Check local access to web through the local host
 
