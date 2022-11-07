@@ -151,5 +151,29 @@
   
      ![step23](./projectPictures/step24_p2.JPG)
 
+   c. After checking relevant information about the PHP server through the above page, it is best practice to remove the file that was created as it contains sensitive information about the PHP environment and the Ubuntu server. Use `rm` to remove the file:
 
+   - `sudo rm /var/www/aufora/info.php`
+  
+     ![step24](./projectPictures/step25_p2.JPG)
 
+   d. The `info.php` file can be regenerated if required.
+
+1. **Retrieving Data from MySql database with PHP**: Create a test database (DB) with simple "To do list" and configure access to it, so the nginx website would be able to query data from the DB and display it.
+
+   a. Connect to mysql console using the root account and create a database named aufora_database and a user named aufora_user
+
+   - `sudo mysql`
+   
+     ![step25](./projectPictures/step26_p2.JPG)
+
+   - `CREATE DATABASE aufora_database;`
+   
+     ![step26](./projectPictures/step27_p2.JPG)
+
+   b. create a new user and grant it full privileges on the database you have just created. 
+   
+   The following command creates a new user named `aufora_user`, using mysql_native_password as default authentication method. We are defining the user’s password as `password`, but you should replace this value with a secure password of your own choosing.
+   - `CREATE USER 'aufora_user'@'%' IDENTIFIED WITH mysql_native_password BY 'P@ssw0rd';`
+   
+     ![step27](./projectPictures/step28_p2.JPG)
