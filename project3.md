@@ -14,8 +14,12 @@
 
    c. Get the location of `node.js` software from Ubuntu repositories.
    
-   -
-       `curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -`
+   - `curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -`
 
      ![step3](./project3Pictures/step3_p3.JPG)
 
+   d. Install `node.js` on the Server.
+   
+   - `sudo apt-get install -y nodejs`
+
+     ![step4](./project3Pictures/step4_p3.JPG)
