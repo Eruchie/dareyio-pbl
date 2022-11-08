@@ -18,7 +18,7 @@
 
      ![step3](./project3Pictures/step3_p3.JPG)
 
-   d. Install `node.js` on the Server.
+   d. Install `node.js` on the Server. The command below will install both `nodejs` and `npm`. NPM is a special package for `nodejs` just like `apt` for ubuntu.
    
    - `sudo apt-get install -y nodejs`
 
