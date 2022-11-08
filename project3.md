@@ -57,17 +57,20 @@
    a. Install express `npm`:
 
    - `npm install express`
-   ![step9](./project3Pictures/step9_p3.JPG)     
+
+     ![step9](./project3Pictures/step9_p3.JPG)     
 
    b. Create a file `index.js`
 
    - `touch index.js`
-   ![step10](./project3Pictures/step10_p3.JPG) 
+  
+     ![step10](./project3Pictures/step10_p3.JPG) 
 
    c. Install the `dotenv` module
 
    - `npm install dotenv`
-   ![step11](./project3Pictures/step11_p3.JPG) 
+   
+     ![step11](./project3Pictures/step11_p3.JPG) 
 
    d. Open the `index.js` 
    
@@ -75,7 +78,7 @@
 
    e. Open the following command
 
-   ```py
+     ```py
     const express = require('express');
     require('dotenv').config();
 
@@ -101,10 +104,30 @@
    
    - Note that we have specified to use port 5000 in the code. This will be required later when we go on the browser. Use :w to save in vim and use :qa to exit vim
 
-   f. Start the server to see if it works. Open the terminal in the same directory as your index.js file and type:
+     f. Start the server to see if it works. Open the terminal in the same directory as your index.js file and type:
+   
    - `node index.js`
-   ![step13](./project3Pictures/step13_p3.JPG)
+    
+     ![step13](./project3Pictures/step13_p3.JPG)
 
-   g. Open up your browser and try to access your server’s Public IP or Public DNS name followed by port 5000
+     g. Open up your browser and try to access your server’s Public IP or Public DNS name followed by port 5000
+   
    - `http://3.134.116.219:5000`
-   ![step14](./project3Pictures/step14_p3.JPG)
+   
+     ![step14](./project3Pictures/step14_p3.JPG)
+
+     h. Routes; There are three actions that the To-Do application needs to be able to do:
+     1. Create a new task
+     2. Display list of tasks
+     3. Delete a completed task
+
+     Each task will be associated with some particular endpoint and will use different standard HTTP request methods: POST GET DELETE.
+
+     For each task, create routes that will define various endpoints that the To-do app will depend on. Carry out the folloing commands
+   
+   - `mkdir routes`
+   - `cd routes`
+   - `touch api.js`
+   - `vim api.js`
+   
+     ![step15](./project3Pictures/step14_p3.JPG)
