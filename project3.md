@@ -54,7 +54,7 @@
 
 1. **Install ExpressJS**: Express is a framework for `node.js`, therefore a lot of things developers would have programmed is already taken care of simplifying development. Express helps define routes of the application based on HTTP methods and URLs. 
 
-   a. Install express `npm`:
+   a. Install express using `npm`:
 
    - `npm install express`
 
@@ -130,4 +130,26 @@
    - `touch api.js`
    - `vim api.js`
    
-     ![step15](./project3Pictures/step14_p3.JPG)
+     ![step15](./project3Pictures/step15_p3.JPG)
+
+     i. Copy below code in the file. 
+
+     ```
+     const express = require ('express');
+     const router = express.Router();
+
+     router.get('/todos', (req, res, next) => {
+
+     });
+
+     router.post('/todos', (req, res, next) => {
+
+     });
+
+     router.delete('/todos/:id', (req, res, next) => {
+
+     })
+
+     module.exports = router;
+
+     ```
