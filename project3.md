@@ -6,3 +6,16 @@
 
    - `sudo apt update`
    ![step1](./project3Pictures/step1_p3.JPG)
+
+   b. Upgrade Ubuntu
+
+   - `sudo apt upgrade`
+   ![step2](./project3Pictures/step2_p3.JPG)
+
+   c. Get the location of `node.js` software from Ubuntu repositories.
+   
+   -
+       `curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -`
+
+     ![step3](./project3Pictures/step3_p3.JPG)
+
