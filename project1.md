@@ -1,5 +1,5 @@
 ## DOCUMENTATION OF LAMP STACK IMPLEMENTATION - PROJECT 1
-
+---
 1. **Installing Apache and updating the firewall**: After creating and logging into my instance via ssh, I ran the following commands:
 
    a. Update a list of packages in package manager

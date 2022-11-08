@@ -1,5 +1,5 @@
 ## WEB STACK IMPLEMENTATION (LEMP STACK) - PROJECT 2
-
+---
 1. **Installing the NGINX Web Server**: After creating and logging into my instance via ssh, I ran the following commands:
 
    a. Update a list of packages in package manager
