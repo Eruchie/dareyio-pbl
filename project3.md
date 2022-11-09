@@ -102,7 +102,7 @@
 
    ``` 
    
-   - Note that we have specified to use port 5000 in the code. This will be required later when we go on the browser. Use :w to save in vim and use :qa to exit vim
+    Note that we have specified to use port 5000 in the code. This will be required later when we go on the browser. Use :w to save in vim and use :qa to exit vim
 
      f. Start the server to see if it works. Open the terminal in the same directory as your index.js file and type:
    
@@ -110,13 +110,13 @@
     
      ![step13](./project3Pictures/step13_p3.JPG)
 
-     g. Open up your browser and try to access your server’s Public IP or Public DNS name followed by port 5000
+    g. Open up your browser and try to access your server’s Public IP or Public DNS name followed by port 5000
    
    - `http://3.134.116.219:5000`
    
      ![step14](./project3Pictures/step14_p3.JPG)
 
-     h. Routes; There are three actions that the To-Do application needs to be able to do:
+    h. Routes; There are three actions that the To-Do application needs to be able to do:
      1. Create a new task
      2. Display list of tasks
      3. Delete a completed task
@@ -132,7 +132,7 @@
    
      ![step15](./project3Pictures/step15_p3.JPG)
 
-     i. Copy and paste the below code into the api.js file and then save. 
+     i. Copy below code in the file. 
 
      ```py
      const express = require ('express');
@@ -153,5 +153,3 @@
      module.exports = router;
 
      ```
-
-     
