@@ -132,7 +132,7 @@
    
      ![step15](./project3Pictures/step15_p3.JPG)
 
-     i. Copy below code in the file. 
+     i. Copy and paste the below code into the api.js file and then save. 
 
      ```py
      const express = require ('express');
@@ -153,3 +153,5 @@
      module.exports = router;
 
      ```
+
+     
