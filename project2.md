@@ -195,7 +195,7 @@
 
    f. Create a test table named `todo_list`. From MySQL console, run the following statement:
    
-     ![step31](./projectPictures/step32_p2.JPG)
+      ![step31](./projectPictures/step32_p2.JPG)
 
    g. Insert a few rows of content in the test table. Repeat the next command a few times, using different VALUES 
    - `INSERT INTO aufora_database.todo_list (content) VALUES ("My first DevOps Project");`
