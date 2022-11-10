@@ -156,7 +156,7 @@
 
      ```
 
-     j. Models; A model will be created since the app will use MongoDB which is a NoSQL database. A model is at the heart of JavaScript based applications, and it is what makes it interactive. 
+    j. Models; A model will be created since the app will use MongoDB which is a NoSQL database. A model is at the heart of JavaScript based applications, and it is what makes it interactive. 
 
      We will use a model to define the database schema; a schema is a blueprint on how the database will be constructed.
 
@@ -231,3 +231,82 @@
      module.exports = router;
      ```
      ![step20](./project3Pictures/step20_p3.JPG)
+
+      n. MONGODB Database; We need to create a database to store data and this will be acheived using **mLab** which provies mongoDB database as a solution (DBaaS). 
+      
+      We will start by creating a shared clusters free account on [MongoDB](https://www.mongodb.com/cloud/atlas/register)
+
+      - On Database Deployments click **Build a Database**.
+
+        ![step21](./project3Pictures/step21_p3.JPG)
+
+      - On Deploy a cloud database click **create** on the free option.
+
+        ![step22](./project3Pictures/step22_p3.JPG)
+
+      - On the next page, click free shared, AWS as the cloud provider,  any suitable region and then click **Create Cluster**.
+
+        ![step23](./project3Pictures/step23_p3.JPG)
+
+      - Create a username and password.
+
+        ![step24](./project3Pictures/step24_p3.JPG)  
+      
+      - Select **Cloud Enviroment** and allow access from anywhere `0.0.0.0/0`.
+
+        ![step25](./project3Pictures/step25_p3.JPG)
+
+      - Click **Finish and Close**.
+
+        ![step26](./project3Pictures/step26_p3.JPG) 
+
+      - Click **Go to Databases**.  
+
+        ![step27](./project3Pictures/step27_p3.JPG)  
+
+      - Click the newly created cluster, **Cluster0** in this case.  
+
+        ![step28](./project3Pictures/step28_p3.JPG) 
+
+      - Click **Collections**.  
+
+        ![step29](./project3Pictures/step29_p3.JPG)  
+
+      - Click **Add My Own Data**.  
+
+        ![step30](./project3Pictures/step30_p3.JPG)   
+
+      - Give a database and collection name, click **Create**.  
+
+        ![step31](./project3Pictures/step31_p3.JPG)   
+  
+
+   o. In the instance created earlier, `process.env` was specified in the `index.js`to access enviroment varibles.
+   
+   This file has to be created in the `Todo` directory and named `.env`.
+
+     - `touch.env && vi .env`
+
+   Paste the connection string below to access the database.
+
+    -  `mongodb+srv://aufora:<password>@cluster0.fwffaed.mongodb.net/?retryWrites=true&w=majority`
+
+       ![step32](./project3Pictures/step32_p3.JPG)
+
+   **NOTE**: The connection string can be gotten as thus:
+
+    - Click **Connect**.  
+
+        ![step33](./project3Pictures/step33_p3.JPG) 
+
+    - Click **Connect your application**.  
+
+        ![step34](./project3Pictures/step34_p3.JPG) 
+
+     - Copy the application string.  
+
+        ![step35](./project3Pictures/step35_p3.JPG) 
+
+
+
+
