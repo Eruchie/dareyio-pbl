@@ -289,9 +289,10 @@
 
    Paste the connection string below to access the database.
 
-    -  `mongodb+srv://aufora:<password>@cluster0.fwffaed.mongodb.net/?retryWrites=true&w=majority`
+    -  `DB = mongodb+srv://aufora:IwQGG2gwwjm5d2Zf@cluster0.fwffaed.mongodb.net/auforadb?retryWrites=true&w=majority`
 
        ![step32](./project3Pictures/step32_p3.JPG)
+       ![step32a](./project3Pictures/step32a_p3.JPG)
 
    **NOTE**: The connection string can be gotten as thus:
 
@@ -308,5 +309,61 @@
         ![step35](./project3Pictures/step35_p3.JPG) 
 
 
+   p. Update the `index.js` to reflect the use of `.env` so that `node.js` can connect to the database.
+   
+     - To begin, delete existing content in the file using `:%d`, and update it with the entire code below.
+
+       ```
+       const express = require('express');
+       const bodyParser = require('body-parser');
+       const mongoose = require('mongoose');
+       const routes = require('./routes/api');
+       const path = require('path');
+       require('dotenv').config();
+
+       const app = express();
+
+       const port = process.env.PORT || 5000;
+
+       //connect to the database
+       mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
+       .then(() => console.log(`Database connected successfully`))
+       .catch(err => console.log(err));
+
+       //since mongoose promise is depreciated, we overide it with node's promise
+       mongoose.Promise = global.Promise;
+
+       app.use((req, res, next) => {
+       res.header("Access-Control-Allow-Origin", "\*");
+       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+       next();
+       });
+
+       app.use(bodyParser.json());
+
+       app.use('/api', routes);
+
+       app.use((err, req, res, next) => {
+       console.log(err);
+       next();
+       });
+
+       app.listen(port, () => {
+       console.log(`Server running on port ${port}`)
+       });
+       ```
+       ![step36](./project3Pictures/step36_p3.JPG) 
+
+       Using environment variables to store information is considered more secure and best practice to separate configuration and secret data from the application, instead of writing connection strings directly inside the index.js application file.
+
+    q. Start the server. The message `Database connected successfully` indicates that the backend was configured properly.
+
+    - `node index.js`
+
+      ![step37](./project3Pictures/step37_p3.JPG)
+
+    r. Test the backend code without frontend using RESTful API.
+    
+    - The backend code of our `Todo` list application has been written with a database confgured. We will use some API development client to test our code. Postman will be used to test the application. 
 
 
