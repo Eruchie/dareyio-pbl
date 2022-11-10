@@ -356,7 +356,7 @@
 
        Using environment variables to store information is considered more secure and best practice to separate configuration and secret data from the application, instead of writing connection strings directly inside the index.js application file.
 
-    q. Start the server. The message `Database connected successfully` indicates that the backend was configured properly.
+    q. Start the server and expect to see the message `Database connected successfully` which signifies the backend was configured properly.
 
     - `node index.js`
 
