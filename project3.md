@@ -5,12 +5,14 @@
    a. Update a list of packages in package manager
 
    - `sudo apt update`
-   ![step1](./project3Pictures/step1_p3.JPG)
+
+     ![step1](./project3Pictures/step1_p3.JPG)
 
    b. Upgrade Ubuntu
 
    - `sudo apt upgrade`
-   ![step2](./project3Pictures/step2_p3.JPG)
+
+     ![step2](./project3Pictures/step2_p3.JPG)
 
    c. Get the location of `node.js` software from Ubuntu repositories.
    
@@ -117,9 +119,9 @@
      ![step14](./project3Pictures/step14_p3.JPG)
 
     h. Routes; There are three actions that the To-Do application needs to be able to do:
-     1. Create a new task
-     2. Display list of tasks
-     3. Delete a completed task
+     - Create a new task
+     - Display list of tasks
+     - Delete a completed task
 
      Each task will be associated with some particular endpoint and will use different standard HTTP request methods: POST GET DELETE.
 
