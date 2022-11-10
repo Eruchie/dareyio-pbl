@@ -153,3 +153,79 @@
      module.exports = router;
 
      ```
+
+     j. Models; A model will be created since the app will use MongoDB which is a NoSQL database. A model is at the heart of JavaScript based applications, and it is what makes it interactive. 
+
+     We will use a model to define the database schema; a schema is a blueprint on how the database will be constructed.
+
+     To create a Schema and a model, we need to install `mongoose` which is a node.js package whch makes working with mongodb easier.
+
+     - `npm install mongoose`
+    
+       ![step17](./project3Pictures/step17_p3.JPG)
+
+     k. Create a new folder `models`, change directory into the newly created `models` folder and create a file named todo.js. **Tip**: Use `&&` operator to execute all three commands in one line as thus:
+
+     - `mkdir models && cd models && touch todo.js`
+    
+       ![step18](./project3Pictures/step18_p3.JPG)
+
+     l. Open the file created with `vim todo.js`, paste the code below in the file and then save and exit:
+
+      ```py
+      const mongoose = require('mongoose');
+      const Schema = mongoose.Schema;
+
+      //create schema for todo
+      const TodoSchema = new Schema({
+      action: {
+      type: String,
+      required: [true, 'The todo text field is required']
+      }
+      })
+
+      //create model for todo
+      const Todo = mongoose.model('todo', TodoSchema);
+
+      module.exports = Todo;
+      ```
+      ![step19](./project3Pictures/step19_p3.JPG)
+
+     m. To make use of the new model, we need to update the routes from the file `api.js` in routes directory.
+
+     In the routes directory, open `api.js` with `vim` editor, delete the code inside using `:%d` command, paste the code below into it then save and exit.
+
+     ```py
+     const express = require ('express');
+     const router = express.Router();
+     const Todo = require('../models/todo');
+
+     router.get('/todos', (req, res, next) => {
+
+     //this will return all the data, exposing only the id and action field to the client
+     Todo.find({}, 'action')
+     .then(data => res.json(data))
+     .catch(next)
+     });
+
+     router.post('/todos', (req, res, next) => {
+     if(req.body.action){
+     Todo.create(req.body)
+     .then(data => res.json(data))
+     .catch(next)
+     }else {
+     res.json({
+     error: "The input field is empty"
+     })
+     }
+     });
+
+     router.delete('/todos/:id', (req, res, next) => {
+     Todo.findOneAndDelete({"_id": req.params.id})
+     .then(data => res.json(data))
+     .catch(next)
+     })
+
+     module.exports = router;
+     ```
+     ![step20](./project3Pictures/step20_p3.JPG)
