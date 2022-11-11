@@ -391,3 +391,12 @@
     
       ![step39](./project3Pictures/step39_p3.JPG)
 
+    - To test the DELETE request add the ID `636e9cb4384eb7e5045e3508` as part of the delete request, set the key: `Content-Type`, value = `application\json` and DELETE = `http://52.14.204.42:5000/api/todos/636e9cb4384eb7e5045e3508` and click send
+    
+      ![step40](./project3Pictures/step40_p3.JPG)
+
+    The Backend has been configured successfully and all the three operations required have been confirmed. 
+
+    - Display a list of tasks – HTTP GET request
+    - Add a new task to the list – HTTP POST request
+    - Delete an existing task from the list – HTTP DELETE request
