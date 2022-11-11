@@ -366,7 +366,7 @@
     
     - The backend code of our `Todo` list application has been written with a database confgured. We will use some API development client to test our code. Postman will be used to test the application. 
 
-    - Open Postman, create a POST request to the API as below (This request sends a new task to our To-Do list so the application could store it in the database):
+    - Open Postman, create a POST request to the API. This request will send a new task to our To-Do list so the application could store it in the database:
     
     - On the header tab, set the key: `Content-Type`, value = `application\json` and POST = `http://52.14.204.42:5000/api/todos`
 
@@ -385,4 +385,9 @@
 
       ![step38c](./project3Pictures/step38_p3.JPG) 
 
+    - Create a GET request to the API on `http://52.14.204.42:5000/api/todos`. This request retrieves all existing records from out To-do application (backend requests these records from the database and sends it us back as a response to GET request).
+
+    - On the header tab, set the key: `Content-Type`, value = `application\json` and GET = `http://52.14.204.42:5000/api/todos`
+    
+      ![step39](./project3Pictures/step39_p3.JPG)
 
