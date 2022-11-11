@@ -366,4 +366,23 @@
     
     - The backend code of our `Todo` list application has been written with a database confgured. We will use some API development client to test our code. Postman will be used to test the application. 
 
+    - Open Postman, create a POST request to the API as below (This request sends a new task to our To-Do list so the application could store it in the database):
+    
+    - On the header tab, set the key: `Content-Type`, value = `application\json` and POST = `http://52.14.204.42:5000/api/todos`
+
+       ![step38a](./project3Pictures/step38a_p3.JPG) 
+
+    - Modify the body as thus: 
+      ```
+      {
+        "action":"This is PROJECT 3"
+      }
+      ```
+
+      ![step38b](./project3Pictures/step38b_p3.JPG) 
+
+    - Click **Send**; the result should be as shown below.
+
+      ![step38c](./project3Pictures/step38_p3.JPG) 
+
 
