@@ -421,7 +421,7 @@
 
      - `npm install nodemon --save-dev`
 
-       ![step43](./project3Pictures/step43_p3.JPG)
+       ![step43](./project3Pictures/step43a_p3.JPG)
 
      c. In the `Todo` folder vim into `package.json file and change code in the screenshot with the below script:
 
