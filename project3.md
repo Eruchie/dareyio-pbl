@@ -313,7 +313,7 @@
    
      - To begin, delete existing content in the file using `:%d`, and update it with the entire code below.
 
-       ```
+       ```py
        const express = require('express');
        const bodyParser = require('body-parser');
        const mongoose = require('mongoose');
@@ -373,7 +373,7 @@
        ![step38a](./project3Pictures/step38a_p3.JPG) 
 
     - Modify the body as thus: 
-      ```
+      ```py
       {
         "action":"This is PROJECT 3"
       }
@@ -399,4 +399,244 @@
 
     - Display a list of tasks – HTTP GET request
     - Add a new task to the list – HTTP POST request
-    - Delete an existing task from the list – HTTP DELETE request
+    - Delete an existing task from the list – HTTP DELETE request  
+
+    
+  1. **Frontend Creation**: A user interface will be created for a web client (browser) to interact with the application via API. To scaffold our app, run the command `create-react-app` in the same root directory, `Todo` as the backend code.
+  
+     - `npx create-react-app client`
+
+       ![step41a](./project3Pictures/step41a_p3.JPG) 
+       ![step41b](./project3Pictures/step41b_p3.JPG) 
+
+     There are some dependencies that will be instaled before testing the react app.
+
+     a. Install `concurrently` used to run more than one command simultaneously from the same terminal window
+
+     - `npm install concurrently --save-dev`
+
+       ![step42](./project3Pictures/step42_p3.JPG)
+
+     b. Install `nodemon` used to monitor the server. `nodemon` will restart the server automatically if there is any change and in turn load the new changes.
+
+     - `npm install nodemon --save-dev`
+
+       ![step43](./project3Pictures/step43_p3.JPG)
+
+     c. In the `Todo` folder vim into `package.json file and change code in the screenshot with the below script:
+
+     ```py
+      "scripts": {
+      "start": "node index.js",
+      "start-watch": "nodemon index.js",
+      "dev": "concurrently \"npm run start-watch\" \"cd client && npm start\""
+      },
+     ```
+    
+       ![step44a](./project3Pictures/step44a_p3.JPG)
+       ![step44b](./project3Pictures/step44b_p3.JPG)
+
+       d. Configure Proxy in `package.json` file located in the client directory; this will make possible access to the application directly through the browser by callling on the server url like `http://localhost:5000` rather than always including the entire path like `http://localhost:5000/api/todos`.
+
+     - `cd client`
+     - `vim package.json`
+     - `"proxy":"http://18.219.89.177:5000"`
+
+     e. Navigate back to `Todo` directory and run the command
+
+     - `npm run dev`
+
+       ![step45a](./project3Pictures/step45a_p3.JPG)
+
+     - `http://18.219.89.177:3000/`
+
+       ![step45b](./project3Pictures/step45b_p3.JPG)
+
+      e. Creating REACT components. REACT makes use of reusable components and it also makes code modular. For the `Todo` app, there will be two stateful components and one stateless component. Run the following in `Todo' directory.
+
+      - `cd client && cd src && mkdir components && cd components`
+
+      Create 3 files inside the components directory
+      
+      - `Touch Input.js ListTodo.js Todo.js` 
+
+        ![step46](./project3Pictures/step46_p3.JPG)
+
+     f. Copy and paste the script below into `Input.js`. 
+
+     ```py
+      import React, { Component } from 'react';
+      import axios from 'axios';
+
+      class Input extends Component {
+
+      state = {
+      action: ""
+      }
+
+      addTodo = () => {
+      const task = {action: this.state.action}
+
+          if(task.action && task.action.length > 0){
+            axios.post('/api/todos', task)
+              .then(res => {
+                if(res.data){
+                  this.props.getTodos();
+                  this.setState({action: ""})
+                }
+              })
+              .catch(err => console.log(err))
+          }else {
+            console.log('input field required')
+          }
+
+      }
+
+      handleChange = (e) => {
+      this.setState({
+      action: e.target.value
+      })
+      }
+
+      render() {
+      let { action } = this.state;
+      return (
+      <div>
+      <input type="text" onChange={this.handleChange} value={action} />
+      <button onClick={this.addTodo}>add todo</button>
+      </div>
+      )
+      }
+      }
+
+      export default Input
+     ```
+     ![step47](./project3Pictures/step47_p3.JPG)
+
+     g. Navigate to `client` directory and install `axios`. This is a promise based HTTP client for the browser and node.js.
+
+     - `npm install axios`
+
+       ![step48](./project3Pictures/step48_p3.JPG)
+
+     h. Navigate to `components` directory
+
+     - `cd src/components`
+     - `vi ListTodo.js`
+
+     In the `ListTodo.js` copy and paste the following code and save.
+
+     ```py
+      import React from 'react';
+
+      const ListTodo = ({ todos, deleteTodo }) => {
+
+      return (
+      <ul>
+      {
+      todos &&
+      todos.length > 0 ?
+      (
+      todos.map(todo => {
+      return (
+      <li key={todo._id} onClick={() => deleteTodo(todo._id)}>{todo.action}</li>
+      )
+      })
+      )
+      :
+      (
+      <li>No todo(s) left</li>
+      )
+      }
+      </ul>
+      )
+      }
+
+      export default ListTodo
+     ```
+     ![step49](./project3Pictures/step49_p3.JPG)
+
+     i. In the `Todo.js` copy and paste the following code and save.
+
+     ```py
+      import React, {Component} from 'react';
+      import axios from 'axios';
+
+      import Input from './Input';
+      import ListTodo from './ListTodo';
+
+      class Todo extends Component {
+
+      state = {
+      todos: []
+      }
+
+      componentDidMount(){
+      this.getTodos();
+      }
+
+      getTodos = () => {
+      axios.get('/api/todos')
+      .then(res => {
+      if(res.data){
+      this.setState({
+      todos: res.data
+      })
+      }
+      })
+      .catch(err => console.log(err))
+      }
+
+      deleteTodo = (id) => {
+
+          axios.delete(`/api/todos/${id}`)
+            .then(res => {
+              if(res.data){
+                this.getTodos()
+              }
+            })
+            .catch(err => console.log(err))
+
+      }
+
+      render() {
+      let { todos } = this.state;
+
+          return(
+            <div>
+              <h1>My Todo(s)</h1>
+              <Input getTodos={this.getTodos}/>
+              <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
+            </div>
+          )
+
+      }
+      }
+
+      export default Todo;
+     ```
+     ![step50](./project3Pictures/step50_p3.JPG)
+
+     i. We need to adjust te REACT code. Delete the logo and adjust `App.js` file. To do this navigate to the `src` directory and open `App.js`.
+
+      - `vi App.js`
+
+     Copy and paste the following script and save.
+
+     ```py
+      import React from 'react';
+
+      import Todo from './components/Todo';
+      import './App.css';
+
+      const App = () => {
+      return (
+      <div className="App">
+      <Todo />
+      </div>
+      );
+      }
+
+      export default App;
+     ```
+     ![step51](./project3Pictures/step51_p3.JPG)
