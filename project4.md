@@ -77,3 +77,98 @@ You can download & install the package from http://archive.ubuntu.com/ubuntu/poo
    - `sudo systemctl status mongod`
    
      ![step10](./project4Pictures/step10_p4.JPG) 
+
+   h. Install `npm` -Node package manager and check the version
+   - `sudo apt install -y npm`
+
+     ![step11](./project4Pictures/step11_p4.JPG) 
+
+    - `npm -v`
+
+      ![step11](./project4Pictures/step11a_p4.JPG)
+
+   i. Install `body-parser` package
+   - `sudo npm install body-parser`
+
+     ![step12](./project4Pictures/step12_p4.JPG) 
+
+   j. Create a folder named Books and in the Books directory, initialize `npm` project
+   - `mkdir Books && cd Books`
+   - `npm init`
+
+     ![step13](./project4Pictures/step13_p4.JPG) 
+
+   k. Add a file named `server.js`and paste the code as shown in the steps below
+   - `vi server.js`
+     ```var express = require('express');
+        var bodyParser = require('body-parser');
+        var app = express();
+        app.use(express.static(__dirname + '/public'));
+        app.use(bodyParser.json());
+        require('./apps/routes')(app);
+        app.set('port', 3300);
+        app.listen(app.get('port'), function() {
+            console.log('Server up: http://localhost:' + app.get('port'));
+        });
+     ```
+        ![step14](./project4Pictures/step14_p4.JPG)   
+
+
+1. **INSTALL EXPRESS AND SETUP ROUTES TO THE SERVER DB**: Express is a minimal and flexible `Node.js` web application framework that provides features for web and mobile applications. We will use Express to pass book information to and from the MongoDB database.
+
+   We will use Mongoose package which provides a straight-forward, schema based solution to the model application data. We will also use Mongoose to establish a schema for the database to store data of our book register. 
+
+   a. Install Express using Mongoose package
+   
+   - `sudo npm install express mongoose`
+   ![step15](./project4Pictures/step15_p4.JPG)  
+
+   b. Create a folder named `apps` in Books folder and within `apps`, create a file named `routes.js` and copy and paste the code below into routes.js
+
+   - `mkdir apps && cd apps`
+   - `vi routes.js`
+   ```
+      var Book = require('./models/book');
+      module.exports = function(app) {
+        app.get('/book', function(req, res) {
+          Book.find({}, function(err, result) {
+            if ( err ) throw err;
+            res.json(result);
+          });
+        }); 
+        app.post('/book', function(req, res) {
+          var book = new Book( {
+            name:req.body.name,
+            isbn:req.body.isbn,
+            author:req.body.author,
+            pages:req.body.pages
+          });
+          book.save(function(err, result) {
+            if ( err ) throw err;
+            res.json( {
+              message:"Successfully added book",
+              book:result
+            });
+          });
+        });
+        app.delete("/book/:isbn", function(req, res) 
+      {
+          Book.findOneAndRemove(req.query, 
+      function(err, result) {
+            if ( err ) throw err;
+            res.json( {
+              message: "Successfully deleted the 
+      book",
+              book: result
+            });
+          });
+        });
+        var path = require('path');
+        app.get('*', function(req, res) {
+          res.sendfile(path.join(__dirname + 
+      '/public', 'index.html'));
+        });
+      };
+   ```
+
+     ![step16](./project4Pictures/step16_p4.JPG)  
