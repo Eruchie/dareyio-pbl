@@ -87,16 +87,17 @@ You can download & install the package from http://archive.ubuntu.com/ubuntu/poo
 
       ![step11](./project4Pictures/step11a_p4.JPG)
 
-   i. Install `body-parser` package
-   - `sudo npm install body-parser`
-
-     ![step12](./project4Pictures/step12_p4.JPG) 
-
-   j. Create a folder named Books and in the Books directory, initialize `npm` project
+  
+   i. Create a folder named Books and in the Books directory, initialize `npm` project
    - `mkdir Books && cd Books`
    - `npm init`
 
      ![step13](./project4Pictures/step13_p4.JPG) 
+
+   j. Install `body-parser` package
+   - `sudo npm install body-parser`
+
+     ![step12](./project4Pictures/step12_p4.JPG) 
 
    k. Add a file named `server.js`and paste the code as shown in the steps below
    - `vi server.js`
@@ -118,12 +119,12 @@ You can download & install the package from http://archive.ubuntu.com/ubuntu/poo
 
    We will use Mongoose package which provides a straight-forward, schema based solution to the model application data. We will also use Mongoose to establish a schema for the database to store data of our book register. 
 
-   a. Install Express using Mongoose package
+   a. Install Express using Mongoose package; navigate to the **Books** directory and instakk express.
    
    - `sudo npm install express mongoose`
    ![step15](./project4Pictures/step15_p4.JPG)  
 
-   b. Create a folder named `apps` in Books folder and within `apps`, create a file named `routes.js` and copy and paste the code on the third step below into `routes.js` file.
+   b. Create a folder named `apps` in **Books** folder and within `apps`, create a file named `routes.js` and copy and paste the code on the third step below into `routes.js` file.
 
    - `mkdir apps && cd apps`
    - `vi routes.js`
@@ -312,3 +313,13 @@ You can download & install the package from http://archive.ubuntu.com/ubuntu/poo
       - `node server.js`
 
         ![step20](./project4Pictures/step20_p4.JPG)
+
+      c. On the browser open the `url` on port 3300 and enter parameters.
+
+      - `http://3.145.144.172:3300/`
+
+        ![step21](./project4Pictures/step21_p4.JPG)
+
+        ![step21](./project4Pictures/step21a_p4.JPG)
+
+        ![step21](./project4Pictures/step21b_p4.JPG)
