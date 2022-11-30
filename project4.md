@@ -123,11 +123,12 @@ You can download & install the package from http://archive.ubuntu.com/ubuntu/poo
    - `sudo npm install express mongoose`
    ![step15](./project4Pictures/step15_p4.JPG)  
 
-   b. Create a folder named `apps` in Books folder and within `apps`, create a file named `routes.js` and copy and paste the code below into routes.js
+   b. Create a folder named `apps` in Books folder and within `apps`, create a file named `routes.js` and copy and paste the code on the third step below into `routes.js` file.
 
    - `mkdir apps && cd apps`
    - `vi routes.js`
-   ```
+
+      ```py
       var Book = require('./models/book');
       module.exports = function(app) {
         app.get('/book', function(req, res) {
@@ -169,6 +170,145 @@ You can download & install the package from http://archive.ubuntu.com/ubuntu/poo
       '/public', 'index.html'));
         });
       };
-   ```
+     ```
 
      ![step16](./project4Pictures/step16_p4.JPG)  
+
+
+   c. In the `apps` folder create another folder named `models` and within `models` folder create a file named `book.js`. Copy and paste the code on the third step below into `book.js` file.
+
+   - `mkdir models && cd models`
+   - `vi book.js`
+
+       ```py
+        var mongoose = require('mongoose');
+        var dbHost = 'mongodb://localhost:27017/test';
+        mongoose.connect(dbHost);
+        mongoose.connection;
+        mongoose.set('debug', true);
+        var bookSchema = mongoose.Schema( {
+          name: String,
+          isbn: {type: String, index: true},
+          author: String,
+          pages: Number
+        });
+        var Book = mongoose.model('Book', bookSchema);
+        module.exports = mongoose.model('Book', bookSchema);
+       ```  
+       ![step17](./project4Pictures/step17_p4.JPG)
+
+1. **ACCESS THE ROUTES WITH ANGULAR JS**: AngularJS provides a web framework for creating dynamic views in web applications. We will use **AngularJS** to connect to the web page with **Express** and perform some actions on the book register. 
+
+    a. Change the directory back to **Books**, create a folder named `public`, navigate to the public directory and create a file `script.js`. Paste the code in the fourth step into `script.js` file.
+   
+     - `cd ../..`
+     - `mkdir public && cd public`
+     - `vi script.js`
+       
+       ```py
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope, $http) {
+          $http( {
+            method: 'GET',
+            url: '/book'
+          }).then(function successCallback(response) {
+            $scope.books = response.data;
+          }, function errorCallback(response) {
+            console.log('Error: ' + response);
+          });
+          $scope.del_book = function(book) {
+            $http( {
+              method: 'DELETE',
+              url: '/book/:isbn',
+              params: {'isbn': book.isbn}
+            }).then(function successCallback(response)
+        {
+              console.log(response);
+            }, function errorCallback(response) {
+              console.log('Error: ' + response);
+            });
+          };
+          $scope.add_book = function() {
+            var body = '{ "name": "' + $scope.Name + 
+            '", "isbn": "' + $scope.Isbn +
+            '", "author": "' + $scope.Author + 
+            '", "pages": "' + $scope.Pages + '" }';
+            $http({
+              method: 'POST',
+              url: '/book',
+              data: body
+            }).then(function successCallback(response)
+        {
+              console.log(response);
+            }, function errorCallback(response) {
+              console.log('Error: ' + response);
+            });
+          };
+        });
+        ```
+
+       ![step18](./project4Pictures/step18_p4.JPG)
+
+      b. In `public` folder, create a file named `index.html` and paste the code in the second step.
+   
+      - `vi index.html`
+
+        ```py
+        <!doctype html>
+        <html ng-app="myApp" ng-controller="myCtrl">
+          <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+            <script src="script.js"></script>
+          </head>
+          <body>
+            <div>
+              <table>
+                <tr>
+                  <td>Name:</td>
+                  <td><input type="text" ng-model="Name"></td>
+                </tr>
+                <tr>
+                  <td>Isbn:</td>
+                  <td><input type="text" ng-model="Isbn"></td>
+                </tr>
+                <tr>
+                  <td>Author:</td>
+                  <td><input type="text" ng-model="Author"></td>
+                </tr>
+                <tr>
+                  <td>Pages:</td>
+                  <td><input type="number" ng-model="Pages"></td>
+                </tr>
+              </table>
+              <button ng-click="add_book()">Add</button>
+            </div>
+            <hr>
+            <div>
+              <table>
+                <tr>
+                  <th>Name</th>
+                  <th>Isbn</th>
+                  <th>Author</th>
+                  <th>Pages</th>
+
+                </tr>
+                <tr ng-repeat="book in books">
+                  <td>{{book.name}}</td>
+                  <td>{{book.isbn}}</td>
+                  <td>{{book.author}}</td>
+                  <td>{{book.pages}}</td>
+
+                  <td><input type="button" value="Delete" data-ng-click="del_book(book)"></td>
+                </tr>
+              </table>
+            </div>
+          </body>
+        </html>
+          ```
+        ![step19](./project4Pictures/step19_p4.JPG)
+
+      b. Change the directory back to **Books** and start the server by running the command below.
+   
+      - `node server.js`
+
+        ![step20](./project4Pictures/step20_p4.JPG)
