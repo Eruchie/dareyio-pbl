@@ -10,7 +10,7 @@
 
    a. Update and upgrade ubuntu
 
-    - `sudp apt update && sudo apt upgrade`
+    - `sudo apt update && sudo apt upgrade`
 
       ![step1](./project4Pictures/step1_p4.JPG)
 
