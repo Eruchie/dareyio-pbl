@@ -57,3 +57,17 @@ ___
     - `SHOW DATABASES;`
     
       ![step9](./project5Pictures/step9_p5.JPG)
+
+1. Create a database `auforaDB` and then `SHOW DATABASES;` to see if it reflects.
+
+    - `CREATE DATABASE auforaDB;`
+    - `SHOW DATABASES;`
+    
+      ![step10](./project5Pictures/step10_p5.JPG)
+
+1. Remove the database `auforaDB` and then `SHOW DATABASES;` to confirm it.
+
+    - `DROP DATABASE auforaDB;`
+    - `SHOW DATABASES;`
+    
+      ![step11](./project5Pictures/step11_p5.JPG)      
