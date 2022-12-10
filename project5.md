@@ -51,23 +51,29 @@ ___
     
       ![step8](./project5Pictures/step8_p5.JPG)
 
-1. Navigate to `mysql-client` and connect remotely to `mysql-server` database engine with the user name `tarzan` and `mysql-server` IP; `18.116.239.78` in our own case. Also check the databases once connected sussessfully.
+1. On the Client Server install `mysql-client`.
+
+    - `sudo apt install -y mysql-client`
+      
+      ![step9](./project5Pictures/step9_p5.JPG)
+
+1. On `mysql-client` connect remotely to `mysql-server` database engine with the username `tarzan` and `mysql-server` IP; `18.116.239.78` in our own case. Also check the databases once connected sussessfully.
 
     - `mysql -u tarzan -h 18.116.239.78 -p`
     - `SHOW DATABASES;`
     
-      ![step9](./project5Pictures/step9_p5.JPG)
+      ![step10](./project5Pictures/step10_p5.JPG)
 
 1. Create a database `auforaDB` and then `SHOW DATABASES;` to see if it reflects.
 
     - `CREATE DATABASE auforaDB;`
     - `SHOW DATABASES;`
     
-      ![step10](./project5Pictures/step10_p5.JPG)
+      ![step11](./project5Pictures/step11_p5.JPG)
 
 1. Remove the database `auforaDB` and then `SHOW DATABASES;` to confirm it.
 
     - `DROP DATABASE auforaDB;`
     - `SHOW DATABASES;`
     
-      ![step11](./project5Pictures/step11_p5.JPG)      
+      ![step12](./project5Pictures/step12_p5.JPG)      
