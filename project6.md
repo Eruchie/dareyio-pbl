@@ -156,9 +156,19 @@ On AWS console, create 3 volumes of 10GB each and and on the same AZ as the `web
           
        ![step23](./project6Pictures/step23_p6.JPG)
 
-1. Update the `/etc/fstab` file so that the mount configuration will persist after restart of the server.
-     - `sudo rsync /home/recovery/logs/. /var/log`
+1. Update the `/etc/fstab` file so that the mount configuration will persist after restart of the server. We will use the UUID of the device to update the `/etc/fstab` file. 
+     - `sudo blkid`
           
-       ![step23](./project6Pictures/step23_p6.JPG)
+       ![step24a](./project6Pictures/step24a_p6.JPG)
 
+      - `sudo vi /etc/fstab`(paste the UUID on the fstab file)
+          
+        ![step24b](./project6Pictures/step24b_p6.JPG)
+
+1. Test the configuration, reload the daemon and verify the setup. 
+     - `sudo mount -a`
+     - `sudo systemctl daemon-reload`
+     - `sudo df -h`
+          
+       ![step25](./project6Pictures/step24a_p6.JPG)
 
