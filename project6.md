@@ -288,3 +288,39 @@ On AWS console, create 3 volumes of 10GB each and on the same AZ as the `db serv
      - `sudo df -h`
           
        ![step43](./project6Pictures/step43_p6.JPG)
+
+**INSTALL WORDPRESS ON THE EC2 `WEB SERVER`**
+
+1. Update the repository. 
+     - `sudo yum -y update`
+          
+       ![step44](./project6Pictures/step44_p6.JPG)
+
+1. Install wget, Apache and it’s dependencies. 
+     - `sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json`
+          
+       ![step45](./project6Pictures/step45_p6.JPG)
+
+1. Start Apache. 
+     - `sudo systemctl enable httpd`
+     - `sudo systemctl start httpd`
+     - `sudo systemctl status httpd`
+          
+       ![step46](./project6Pictures/step46_p6.JPG)
+
+1. Install PHP and its dependencies. 
+     - `sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm`
+
+       ![step47](./project6Pictures/step47_p6.JPG)
+
+     - `sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm`
+
+       ![step48](./project6Pictures/step48_p6.JPG)
+
+     - `sudo yum module list php`
+          
+       ![step49](./project6Pictures/step49_p6.JPG)
+
+     - `sudo yum module reset php`
+          
+       ![step50](./project6Pictures/step50_p6.JPG)
