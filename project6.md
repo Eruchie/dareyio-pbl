@@ -141,7 +141,7 @@ On AWS console, create 3 volumes of 10GB each and on the same AZ as the `web ser
        ![step20](./project6Pictures/step20_p6.JPG)
 
 1. Before mounting the filesystem, use `rsync` utility to backup all the files from the log directory `/var/log` into `/home/recovery/logs`.
-     - `sudo rsync -av /var/log/. /home/recovery/logs/`
+     - `sudo rsync -av /var/log /home/recovery/logs`
           
        ![step21](./project6Pictures/step21_p6.JPG)
 
@@ -152,7 +152,7 @@ On AWS console, create 3 volumes of 10GB each and on the same AZ as the `web ser
        ![step22](./project6Pictures/step22_p6.JPG)
 
 1. Restore the log files back into `/var/log` directory.
-     - `sudo rsync -av /home/recovery/logs/. /var/log`
+     - `sudo rsync -av /home/recovery/logs/log/. /var/log`
           
        ![step23](./project6Pictures/step23_p6.JPG)
 
