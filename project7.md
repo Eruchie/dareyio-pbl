@@ -145,4 +145,83 @@ It is important to know what storage solution is suitable for what use cases, fo
 
     ![pic15](./project7Pictures/step15_p7.JPG)
 
-   
+**STEP 2 - CONFIGURE THE DATABASE SERVER**
+1. Install `mysql` Server.
+
+   - `sudo yum update`
+   - `sudo yum install mysql-server`
+   - `sudo systemctl restart mysqld`
+   - `sudo systemctl enable mysqld`
+   - `sudo systemctl status mysqld`
+
+     ![pic16](./project7Pictures/step16_p7.JPG)
+
+2. Create a database and name it `tooling`, create a database user named `webaccess` and also grant permission to `webaccess` user on `tooling` database to do anything only from the webservers `subnet cidr`.
+   - `sudo mysql`
+   - `CREATE DATABASE tooling;`
+   - `CREATE USER 'webaccess'@'172.31.0.0/20' IDENTIFIED BY 'password';`
+   - `GRANT ALL ON tooling.* TO 'webaccess'@'172.31.0.0/20';`
+   - `FLUSH PRIVILEGES;`
+   - `SHOW DATABASES;`
+
+     ![pic17](./project7Pictures/step17_p7.JPG)
+
+**STEP 3 - PREPARE THE WEB SERVERS**
+We need to make sure that our Web Servers can serve the same content from shared storage solutions, in our case – NFS Server and MySQL database.
+
+one DB can be accessed for `read/write` by multiple clients. For storing shared files that our Web Servers will use, we will utilize NFS and mount previously created Logical Volume `lv-apps` to the folder where Apache stores files to be served to the users (`/var/www`).
+
+This approach will make our Web Servers `stateless`, which means we will be able to add new ones or remove them whenever we need, and the integrity of the data (in the database and on NFS) will be preserved.
+
+- The following stages will be carried out during this step
+
+  - Configure NFS client (this step must be done on all three servers)
+   - Deploy a Tooling application to our Web Servers into a shared NFS folder
+   - Configure the Web Servers to work with a single MySQL database
+
+1. Launch a new EC2 instance with RHEL 8 Operating System required for the Web Server.
+2. Install NFS client  
+    - `sudo yum install nfs-utils nfs4-acl-tools -y`
+
+      ![pic18](./project7Pictures/step18_p7.JPG)
+
+3. Mount `/var/www/` and target the NFS server’s export for apps and verify that NFS was mounted successfully by running `df -h`.
+    - `sudo mkdir /var/www`
+    - `sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www`
+
+      ![pic19](./project7Pictures/step19_p7.JPG)
+
+4. Make sure that the changes will persist on Web Server after reboot by updating the `fstab`with `<NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0`.
+    - `sudo vi /etc/fstab`
+    - `<NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0`
+
+      ![pic20](./project7Pictures/step20_p7.JPG)
+
+5. Install `Remi’s repository`, `Apache` and `PHP`.
+    - `sudo yum install httpd -y`
+    - `sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm`
+    - `sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm`
+    - `sudo dnf module reset php`
+    - `sudo dnf module enable php:remi-7.4`
+    - `sudo dnf install php php-opcache php-gd php-curl php-mysqlnd`
+    - `sudo systemctl start php-fpm`
+    - `sudo systemctl enable php-fpm`
+    - `setsebool -P httpd_execmem 1`
+
+      ![pic21](./project7Pictures/step21_p7.JPG)
+
+**Repeat steps 1-5 for another 2 Web Servers.**
+
+6. Verify that Apache files and directories are available on the Web Server in `/var/www` and also on the NFS server in `/mnt/apps`. If you see the same files – it means NFS is mounted correctly. You can try to create a new file `touch test.txt` from one server and check if the same file is accessible from other Web Servers.
+
+   ![pic22a](./project7Pictures/step22a_p7.JPG)
+
+   ![pic22b](./project7Pictures/step22b_p7.JPG)
+
+  7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step №4 to make sure the mount point will persist after reboot.
+
+      ![pic23](./project7Pictures/step23_p7.JPG)
+
+8. Fork the tooling source code from [Darey.io Github Account (https)] to your Github account.
+
+    
