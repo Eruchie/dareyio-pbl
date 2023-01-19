@@ -262,9 +262,11 @@ This approach will make our Web Servers `stateless`, which means we will be able
      
       ![pic29](./project7Pictures/step29_p7.JPG)
 
-13. On the browser paste the public url of the web server and ensure the `Apache` test page is loaded.
+13. Open the website in your browser http://<`Web-Server-Public-IP-Address-or-Public-DNS-Name`> and make sure you can login into the website with `xMerv` user.
+
+     - `http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>`
     
-      ![pic30](./project7Pictures/step30_p7.JPG)
+       ![pic30](./project7Pictures/step30_p7.JPG)
 
 14. Update the website’s configuration to connect to the database (in `/var/www/html/functions.php` file). 
 
@@ -290,13 +292,13 @@ This approach will make our Web Servers `stateless`, which means we will be able
      
        ![pic33](./project7Pictures/step33_p7.JPG)
 
- 17. Apply `tooling-db.sql` script to the database using this command mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql.
+ 17. Apply `tooling-db.sql` script to the database using this command mysql -h <`databse-private-ip`> -u <`db-username`> -p <`db-pasword`> < tooling-db.sql.
 
      - `mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql`
 
        ![pic34](./project7Pictures/step34_p7.JPG)
 
-18. Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with `xMerv` user.
+18. Open the website in your browser http://<`Web-Server-Public-IP-Address-or-Public-DNS-Name/index.php`> and make sure you can login into the website with `xMerv` user.
 
      - `http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php`
 
