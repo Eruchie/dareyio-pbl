@@ -222,6 +222,89 @@ This approach will make our Web Servers `stateless`, which means we will be able
 
       ![pic23](./project7Pictures/step23_p7.JPG)
 
-8. Fork the tooling source code from [Darey.io Github Account (https)] to your Github account.
+8. Fork the tooling source code from [Mervin Github Account](https://github.com/Eruchie/tooling) to your own Github account.
+
+9. Install and initialize `git` on the `web servers` and then clone the tooling repository.
+
+    - `sudo yum install git`
+    
+      ![pic24](./project7Pictures/step24_p7.JPG)
+
+    - `git init`
+    
+      ![pic25](./project7Pictures/step25_p7.JPG)
+
+    - `git clone https://github.com/Eruchie/tooling.git`
+
+      ![pic26](./project7Pictures/step26_p7.JPG)
+
+10. Deploy the tooling website’s code to the Webserver and ensure that the **html** folder from the repository is deployed to `/var/www/html`.
+
+    - `cd tooling`
+    - `ls`
+    - `sudo cp -R html/. /var/www/html`
+    - `ls /var/www/html`
+    
+      ![pic27](./project7Pictures/step27_p7.JPG)
+
+11. Ensure to to open TCP port 80 on the Web Servers and also disable SELinux `sudo setenforce 0`. To make this change permanent – open following config file `sudo vi /etc/sysconfig/selinux` and set SELINUX=disabled then restart `httpd`.
+
+    - `cd ~ && sudo setenforce 0`
+    - `sudo vi /etc/sysconfig/selinux`
+    
+      ![pic28](./project7Pictures/step28_p7.JPG)
+
+12. Enable,restart and check the status of `httpd` service to ensure it is running.
+
+    - `sudo systemctl enable httpd`
+    - `sudo systemctl restart httpd`
+    - `sudo systemctl status httpd`
+     
+      ![pic29](./project7Pictures/step29_p7.JPG)
+
+13. On the browser paste the public url of the web server and ensure the `Apache` test page is loaded.
+    
+      ![pic30](./project7Pictures/step30_p7.JPG)
+
+14. Update the website’s configuration to connect to the database (in `/var/www/html/functions.php` file). 
+
+    - `sudo vi /var/www/html/functions.php`
+
+      ![pic31](./project7Pictures/step31_p7.JPG)
+
+ 15. Install `mysql` client on the web Server(s).
+
+     - `sudo yum install mysql`
+
+       ![pic32](./project7Pictures/step32_p7.JPG)
+
+16. Create in MySQL a new admin user with username: `xMerv` and password: `password`. Use the string 5f4dcc3b5aa765d61d8327deb882cf99 which equates to `password`
+
+     - `cd tooling`
+     - `sudo vi tooling-db.sql`
+
+        ```
+            INSERT INTO ‘users’ (‘id’, ‘username’, ‘password’, ’email’, ‘user_type’, ‘status’) VALUES
+            -> (1, ‘xMerv’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘xMerv@merv.com’, ‘admin’, ‘1’);
+        ```
+     
+       ![pic33](./project7Pictures/step33_p7.JPG)
+
+ 17. Apply `tooling-db.sql` script to the database using this command mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql.
+
+     - `mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql`
+
+       ![pic34](./project7Pictures/step34_p7.JPG)
+
+18. Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with `xMerv` user.
+
+     - `http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php`
+
+       ![pic35](./project7Pictures/step35_p7.JPG)
+
+       ![pic36](./project7Pictures/step36_p7.JPG)
+
+
+        
 
     
