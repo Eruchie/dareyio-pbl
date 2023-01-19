@@ -188,6 +188,7 @@ This approach will make our Web Servers `stateless`, which means we will be able
 3. Mount `/var/www/` and target the NFS server’s export for apps and verify that NFS was mounted successfully by running `df -h`.
     - `sudo mkdir /var/www`
     - `sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www`
+    - `df -h`
 
       ![pic19](./project7Pictures/step19_p7.JPG)
 
@@ -206,7 +207,7 @@ This approach will make our Web Servers `stateless`, which means we will be able
     - `sudo dnf install php php-opcache php-gd php-curl php-mysqlnd`
     - `sudo systemctl start php-fpm`
     - `sudo systemctl enable php-fpm`
-    - `setsebool -P httpd_execmem 1`
+    - `sudo setsebool -P httpd_execmem 1`
 
       ![pic21](./project7Pictures/step21_p7.JPG)
 
@@ -220,7 +221,9 @@ This approach will make our Web Servers `stateless`, which means we will be able
 
   7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step №4 to make sure the mount point will persist after reboot.
 
-      ![pic23](./project7Pictures/step23_p7.JPG)
+     - `sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/logs /var/log/httpd`
+
+       ![pic23](./project7Pictures/step23_p7.JPG)
 
 8. Fork the tooling source code from [Mervin Github Account](https://github.com/Eruchie/tooling) to your own Github account.
 
@@ -262,7 +265,7 @@ This approach will make our Web Servers `stateless`, which means we will be able
      
       ![pic29](./project7Pictures/step29_p7.JPG)
 
-13. Open the website in your browser http://<`Web-Server-Public-IP-Address-or-Public-DNS-Name`> and make sure you can login into the website with `xMerv` user.
+13. Open the website in your browser http://<`Web-Server-Public-IP-Address-or-Public-DNS-Name`>.
 
      - `http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>`
     
@@ -292,9 +295,9 @@ This approach will make our Web Servers `stateless`, which means we will be able
      
        ![pic33](./project7Pictures/step33_p7.JPG)
 
- 17. Apply `tooling-db.sql` script to the database using this command mysql -h <`databse-private-ip`> -u <`db-username`> -p <`db-pasword`> < tooling-db.sql.
+ 17. Apply `tooling-db.sql` script to the database using this command mysql -h <`databse-private-ip`> -u <`db-username`> -p <`db-password`> < tooling-db.sql.
 
-     - `mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql`
+     - `mysql -h <databse-private-ip> -u <db-username> -p <db-password> < tooling-db.sql`
 
        ![pic34](./project7Pictures/step34_p7.JPG)
 
