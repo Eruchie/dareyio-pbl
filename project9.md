@@ -158,4 +158,83 @@ In this step, we will learn how to configure a simple `Jenkins` job/project (the
 
       ![Pic17b](./project9Pictures/step17b_p9.JPG)
 
+We have now configured an automated `Jenkins` job that receives files from GitHub by `webhook` trigger (this method is considered as `‘push’` because the changes are being ‘pushed’ and files transfer is initiated by GitHub). There are also other methods: trigger one job (`downstream`) from another (`upstream`), pull GitHub periodically and others.
 
+By default, the artifacts are stored on Jenkins server locally
+- `ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/`
+
+  ![Pic18](./project9Pictures/step18_p9.JPG)
+
+**CONFIGURE JENKINS TO COPY FILES TO NFS SERVER VIA SSH**
+
+Now we have our artifacts saved locally on Jenkins server, the next step is to copy them to our NFS server to `/mnt/apps` directory.
+
+`Jenkins` is a highly extendable application and there are 1400+ plugins available. We will need a plugin that is called `Publish Over SSH`.
+
+1. Install "Publish Over SSH" plugin.  
+
+    - On main dashboard select `Manage Jenkins` and choose `Manage Plugins` menu item.
+
+      ![Pic19a](./project9Pictures/step19a_p9.JPG) 
+
+     - On "`Available plugins`" tab search for `Publish Over SSH` plugin and click `Install without restart`.
+
+       ![Pic19b](./project9Pictures/step19b_p9.JPG)
+
+2. Configure the job/project to copy artifacts over to `NFS` server.  
+
+    - On main dashboard select `Manage Jenkins` and choose `Configure System` menu item.
+
+      ![Pic20a](./project9Pictures/step20a_p9.JPG) 
+
+     - Scroll down to `Publish over SSH plugin` configuration section and configure it to be able to connect to `NFS` server. Here provide the private key (content of .pem file that you use to connect to NFS server via SSH/Putty)
+
+       ![Pic20b](./project9Pictures/step20b_p9.JPG)
+
+3. Scroll down to `SSH Server` configuration section, add the entries below and `Save` the configuration.
+
+   - **Name**: `ec2-user@<NFS-Private-IP>`
+   - **Hostname**: `<NFS-Private-IP>`
+   - **Username**: `ec2-user`
+     - Since NFS server is based on EC2 with RHEL 8
+   - **Remote Directory**: `/mnt/apps`
+     - Since our Web Servers use it as a mounting point to retrieve files from the NFS server.
+   - Test the configuration and make sure the connection returns `Success`. Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
+
+     ![Pic20c](./project9Pictures/step20c_p9.JPG)
+
+4. Open your `Jenkins` job/project configuration page and add another one `Post-build Action`.
+
+   - Click `Add post-build action` and select `Send build artifacts over SSH`.
+
+      ![Pic21a](./project9Pictures/step21a_p9.JPG) 
+    
+    - Update the Name and ensure to add `**` (required to copy all files and directories) on `Source files` filed under **Transfer Set**. Click `Save`.
+
+      ![Pic21b](./project9Pictures/step21b_p9.JPG) 
+
+5. Change something in `README.MD` file or any file in  GitHub `Tooling` repository.
+
+   `Webhook` will trigger a new job and in the `Console Output`.
+
+   - If the outut is as shown below.
+
+      ![Pic22a](./project9Pictures/step22a_p9.JPG) 
+
+   - Check the ownership of the folder by running `ls -ltr` in the parent working directory. Change the ownership using the command below:
+
+   - `sudo chown -R <user> DirectoryName/`
+
+      ![Pic22c](./project9Pictures/step22c_p9.JPG) 
+
+6. Repeat `Step 5` above. `Webhook` will trigger a new job and in the `Console Output` of the job you will look like this
+
+     ![Pic23](./project9Pictures/step23_p9.JPG) 
+
+7. To make sure that the files in `/mnt/apps` have been udated – connect via SSH/Putty to the `NFS` server and check `README.MD` file.
+    - `cat /mnt/apps/README.md`
+
+      ![Pic24a](./project9Pictures/step24a_p9.JPG) 
+      ![Pic24b](./project9Pictures/step24b_p9.JPG)
+
+    
