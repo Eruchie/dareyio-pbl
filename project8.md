@@ -132,3 +132,7 @@ To deploy and configure an Apache Load Balancer for **Tooling Website** solution
 Now your set up looks like this:
 
  ![Pic9](./project8Pictures/step9_p8.JPG)
+
+
+
+ 
