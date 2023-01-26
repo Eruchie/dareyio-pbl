@@ -94,7 +94,7 @@ The target architecture will look like this:
 
 4. Write down the entries under **Value/Route traffic**. This is required to update the `Name Servers` on your `domain` host panel.
 
-   ![Pic7](./project10Pictures/step_p10.JPG)
+   ![Pic7](./project10Pictures/step7_p10.JPG)
 
 5. Logon to your `domain` host panel. (This process may differ from other domain registrar) 
 
