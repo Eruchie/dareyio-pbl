@@ -134,13 +134,13 @@ The target architecture will look like this:
 
     - Click `Create records`
 
-      ![Pic12](./project10Pictures/step12_p10.JPG)
+      ![Pic12](./project10Pictures/step12_p10.jpg)
 
 9. Check that the `nginx` Web interface can be reached from your browser using new domain name using `HTTP` protocol.
 
     - `http://<your-domain-name.com>`
 
-      ![Pic13](./project10Pictures/step13_p10.JPG)
+      ![Pic13](./project10Pictures/step13_p10.jpg)
 
 
 10. Let us update `nginx.conf` with `server_name www.<your-domain-name.com>` instead of `server_name www.domain.com` so that `Nginx` will recognize the new `domain` name.
@@ -148,23 +148,23 @@ The target architecture will look like this:
     - `sudo vi /etc/nginx/nginx.conf`
     - Replace `server_name www.domain.com` with `server_name www.<your-domain-name.com>`
 
-      ![Pic14](./project10Pictures/step14_p10.JPG)
+      ![Pic14](./project10Pictures/step14_p10.jpg)
 
 11. Confirm `snapd` service is active and running. `snapd` is a command-line interface tool used to install and manage snaps on a Linux system.
 
     - `sudo systemctl status snapd`
 
-      ![Pic15](./project10Pictures/step15_p10.JPG)
+      ![Pic15](./project10Pictures/step15_p10.jpg)
 
 12. Update the hosts file with domain name and external IP and then install `certbot`.
 
     - `sudo vi /etc/hosts`
 
-      ![Pic16a](./project10Pictures/step16a_p10.JPG)
+      ![Pic16a](./project10Pictures/step16a_p10.jpg)
 
      - `sudo snap install --classic certbot`
 
-       ![Pic16b](./project10Pictures/step16b_p10.JPG)
+       ![Pic16b](./project10Pictures/step16b_p10.jpg)
 
 13. Request for certificate (just follow the `certbot` instructions – you will need to choose which `domain` you want your certificate to be issued for, domain name will be looked up from `nginx.conf` file so make sure you have updated it on step 10).
 
@@ -172,25 +172,25 @@ The target architecture will look like this:
 
     - `sudo certbot --nginx`
 
-      ![Pic17](./project10Pictures/step17_p10.JPG)
+      ![Pic17](./project10Pictures/step17_p10.jpg)
 
 14. Test secured access to your Web Solution by trying to reach `https://<your-domain-name.com>`
 
     - `https://<your-domain-name.com>`
 
-      ![Pic18](./project10Pictures/step18_p10.JPG)
+      ![Pic18](./project10Pictures/step18_p10.jpg)
 
 15. On your browser:
 
     - Click on the `padlock` icon and you can see the details of the certificate issued for your website.
 
-       ![Pic19](./project10Pictures/step19_p10.JPG)
+       ![Pic19](./project10Pictures/step19_p10.jpg)
 
 16. Set up periodical renewal of the SSL/TLS certificate. By default, LetsEncrypt certificate is valid for 90 days, so it is recommended to renew it at least every 60 days or more frequently. You can test renewal command in `dry-run` mode.
 
     - `sudo certbot renew --dry-run`
 
-        ![Pic20](./project10Pictures/step20_p10.JPG)
+        ![Pic20](./project10Pictures/step20_p10.jpg)
 
 17. Best pracice is to have a scheduled job that to run `renew` command periodically. Let us configure a `cronjob` to run the command twice a day.
 
@@ -203,7 +203,7 @@ The target architecture will look like this:
       * */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
       ```
 
-        ![Pic21](./project10Pictures/step21_p10.JPG)
+        ![Pic21](./project10Pictures/step21_p10.jpg)
 
      You can always change the interval of this cronjob if twice a day is too often by adjusting schedule expression.
 
@@ -229,7 +229,7 @@ The target architecture will look like this:
            }
          }
      ```
-      ![Pic22](./project10Pictures/step22_p10.JPG)
+      ![Pic22](./project10Pictures/step22_p10.jpg)
 
 2. Remove `nginx` default site so that the reverse proxy will redirect to the new config file and also run `sudo nginx -t` to check if `nginx` is configured successfully
 
@@ -237,14 +237,14 @@ The target architecture will look like this:
 
    - `sudo nginx -t`
 
-     ![Pic23](./project10Pictures/step23_p10.JPG)
+     ![Pic23](./project10Pictures/step23_p10.jpg)
 
 3. Navigate to `/etc/nginx/sites-enabled` and ensure that there is no file there.
   
    - `cd /etc/nginx/sites-enabled`
    - `ls`
 
-     ![Pic24](./project10Pictures/step24_p10.JPG)
+     ![Pic24](./project10Pictures/step24_p10.jpg)
 
 4. Link the newly created Load balancer config file created in sites-available to sites-enabled and also confirm that `load_balancer.conf` has been linked by using `ll` command which will show us the link arrow. Also reload `nginx`.
 
@@ -256,10 +256,10 @@ The target architecture will look like this:
 
    - `sudo systemctl reload nginx`
 
-     ![Pic25](./project10Pictures/step25_p10.JPG)
+     ![Pic25](./project10Pictures/step25_p10.jpg)
 
 5. Check that the Web Servers can be reached from your browser using the new `domain` name with `HTTPS` protocol – https://`<your-domain-name.com>`.
 
    - `https://<your-domain-name.com>`
 
-     ![Pic26](./project10Pictures/step26_p10.JPG)
+     ![Pic26](./project10Pictures/step26_p10.jpg)
