@@ -84,7 +84,7 @@ The target architecture will look like this:
 
      ![Pic5](./project10Pictures/step5_p10.JPG)
 
-3. Update the Hosted zone configuration page.
+3. Update the **Hosted zone configuration** page.
 
     - On the **Domain name field**, enter `mervintec.com`, which is our domain name for this project.
     - Select **Public hosted zone** 
@@ -96,7 +96,7 @@ The target architecture will look like this:
 
    ![Pic7](./project10Pictures/step7_p10.jpg)
 
-5. Logon to your `domain` host panel. (This process may differ from other domain registrar) 
+5. Logon to your `domain` host panel. (This process may differ from other domain registrars) 
 
       - Select your `domain` name 
       - Click `manage` 
