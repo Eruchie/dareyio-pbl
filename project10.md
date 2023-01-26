@@ -174,7 +174,7 @@ The target architecture will look like this:
 
       ![Pic17](./project10Pictures/step17_p10.jpg)
 
-14. Test secured access to your Web Solution by trying to reach `https://<your-domain-name.com>`
+14. Test secure access to your Web Solution by trying to reach `https://<your-domain-name.com>`
 
     - `https://<your-domain-name.com>`
 
