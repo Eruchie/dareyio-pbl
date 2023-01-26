@@ -94,37 +94,37 @@ The target architecture will look like this:
 
 4. Write down the entries under **Value/Route traffic**. This is required to update the `Name Servers` on your `domain` host panel.
 
-   ![Pic7](./project10Pictures/step7_p10.JPG)
+   ![Pic7](./project10Pictures/step7_p10.jpg)
 
 5. Logon to your `domain` host panel. (This process may differ from other domain registrar) 
 
       - Select your `domain` name 
       - Click `manage` 
 
-        ![Pic8](./project10Pictures/step8_p10.JPG)
+        ![Pic8](./project10Pictures/step8_p10.jpg)
 
 6. On the management panel
     - Navigate to `NAMESERVERS`
     - Select `Custom DNS`
 
-      ![Pic9](./project10Pictures/step9_p10.JPG)
+      ![Pic9](./project10Pictures/step9_p10.jpg)
 
 7. On the Custom `DNS`.
     - Update the entries with `ROUTE 53` Values on `Step 4`.
     - Click the green check button to save entries.
 
-      ![Pic10](./project10Pictures/step10_p10.JPG)
+      ![Pic10](./project10Pictures/step10_p10.jpg)
 
 8. We need to create records under the **Hosted zone details**.
 
     - Click `Create record`
 
-      ![Pic11a](./project10Pictures/step11a_p10.JPG)
+      ![Pic11a](./project10Pictures/step11a_p10.jpg)
 
     - In **Value** filed, enter the nginx public IP address.
     - Click `Create records`
 
-      ![Pic11b](./project10Pictures/step11b_p10.JPG)
+      ![Pic11b](./project10Pictures/step11b_p10.jpg)
 
     - Click `Create record` on **Hosted zone details**
 
