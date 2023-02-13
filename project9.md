@@ -27,9 +27,11 @@ The updated architecture will look like this upon completion of this project:
 
 3. Install `Jenkins` 
 
-   - `wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+      ```
+          wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
       sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
-      /etc/apt/sources.list.d/jenkins.list'` 
+          /etc/apt/sources.list.d/jenkins.list'
+      ``` 
 
      ![Pic2](./project9Pictures/step2_p9.JPG)
 
