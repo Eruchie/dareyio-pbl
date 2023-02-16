@@ -307,7 +307,7 @@ Now, it is time to execute `ansible-playbook` command and verify if your playboo
 
 1. On the bastion/Jenkins-Ansible server, run the command
 
-   - `ansible-playbook -i /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/inventory.dev.yml /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/playbooks/common.yml`
+   - `ansible-playbook -i /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/inventory/dev.yml /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/playbooks/common.yml`
  
      ![Pic26](./project11Pictures/step26_p11.JPG)
 
