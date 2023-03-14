@@ -15,11 +15,11 @@ In this project, we will move things around a little bit in the code, but the ov
 **STEP 1 - JENKINS JOB ENHANCEMENT**
 Every new change in the code create a separate directory which is not very convenient when we want to run some commands from one place. Also, it consumes space on `Jenkins` server with each subsequent change. Let us enhance it by introducing a new Jenkins project/job – we will require **Copy Artifact** plugin.
 
-1. ssh to `Jenkins-Ansible` server and create a new directory called `ansible-config-artifact` – this is where all the artifacts will be stored after each build. Change permissions to this directory, so Jenkins could save files there.
+1. ssh to `Jenkins-Ansible` server, cd to the path `/var/lib/jenkins`. Switch account to jenkins user and create a new directory called `ansible-config-artifact` – this is where all the artifacts will be stored after each build.
 
-   - `sudo mkdir /home/ubuntu/ansible-config-artifact`
-
-   - `chmod -R 0777 /home/ubuntu/ansible-config-artifact`
+   - `cd /var/lib/jenkins`
+   - `sudo su jenkins`
+   - `mkdir ansible-config-artifact`
 
      ![Pic1](./project12Pictures/step1_p12.JPG)
 
@@ -39,7 +39,7 @@ Every new change in the code create a separate directory which is not very conve
 
 4. The main idea of `save_artifacts` project is to save artifacts into `/home/ubuntu/ansible-config-artifact` directory. To achieve this, create a `Build` step and choose **Copy artifacts from other project**, specify ansible as a source project and /home/ubuntu/ansible-config-artifact as a target directory. Configure it accordingly:
 
-   - In the **Build Steps** section, select **Copy artifacts from other project**. Under **Artifacts to copy** type `**` and on **Target Directory** type the path `/home/ubuntu/ansible-config-artifact` and then click **Save**.
+   - In the **Build Steps** section, select **Copy artifacts from other project**. Under **Artifacts to copy** type `**` and on **Target Directory** type the path `/var/lib/jenkins/ansible-config-artifact` and then click **Save**.
 
      ![Pic5](./project12Pictures/step5_p12.JPG)
 
@@ -47,7 +47,7 @@ Every new change in the code create a separate directory which is not very conve
 
    ![Pic6](./project12Pictures/step6_p12.JPG)
 
-6. If both Jenkins jobs have completed one after another – you shall see your files inside `/home/ubuntu/ansible-config-artifact` directory and it will be updated with every commit to your `main` branch.
+6. If both Jenkins jobs have completed one after another – you shall see your files inside `/var/lib/jenkins/ansible-config-artifact` directory and it will be updated with every commit to your `main` branch.
 
    ![Pic7](./project12Pictures/step7_p12.JPG)
 
