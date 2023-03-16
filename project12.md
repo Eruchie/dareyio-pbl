@@ -267,3 +267,68 @@ configure 2 new Web Servers as `uat`. We could write tasks to configure Web Serv
       state: absent
    ```
    ![Pic15](./project12Pictures/step15_p12.JPG)
+
+**STEP 4 - REFERENCE WEB SERVER ROLE**
+
+Within the `static-assignments` folder, create a new assignment for **uat_webservers** `uat_webservers.yml`. This is where the role will be referenced.
+
+   ```
+   ---
+   - hosts: uat_webservers
+   roles:
+      - webserver
+   ```
+   Remember that the entry point to our ansible configuration is the `site.yml` file. Therefore, you need to refer your `uat_webservers.yml` role inside `site.yml`.
+
+   So, we should have this in `site.yml`
+
+   ```py
+   ---
+   - hosts: all
+   - import_playbook: ../static-assignments/common.yml
+
+   - hosts: uat-webservers
+   - import_playbook: ../static-assignments/uat_webservers.yml
+   ```
+   You may disabla the first role.
+
+   ![Pic16a](./project12Pictures/step16a_p12.JPG)
+
+**STEP 5 - COMMIT AND TEST**
+
+1. Commit the changes where necessary, create a Pull Request and merge them to `main` branch, make sure webhook triggered two consequent `Jenkins` jobs, they ran successfully and copied all the files to your `Jenkins-Ansible` server into `/home/ubuntu/ansible-config-mngt/` directory.
+
+    ![Pic16b](./project12Pictures/step16b_p12.JPG)
+
+2. Create a directory key and store the pem file created in aws which was used in creating the `EC2` instances. Update ansible.cfg file with the path to the pem file. `private_key_file = /home/ubuntu/key/projectKey.pem`
+
+   ```
+   [defaults]
+   roles_path = /home/ubuntu/ansible-config-mngt/roles
+
+   private_key_file = /home/ubuntu/key/projectKey.pem
+   ```
+   ![Pic17](./project12Pictures/step17_p12.JPG)
+
+3. Run the playbook against the `uat` inventory.
+
+   ```
+   sudo ansible-playbook -i /home/ubuntu/ansible-config-mngt/inventory/uat.yml /home/ubuntu/ansible-config-mngt/playbooks/site.yml
+   ```
+   ![Pic18](./project12Pictures/step18_p12.JPG)
+
+4. You should be able to see both of your UAT Web servers configured and you can try to reach them from your browser:
+
+   `http://<Web1-UAT-Server-Public-IP-or-Public-DNS-Name>/index.php`
+
+   ![Pic19a](./project12Pictures/step19a_p12.JPG)
+
+   or
+
+   `http://<Web1-UAT-Server-Public-IP-or-Public-DNS-Name>/index.php`
+
+   ![Pic19b](./project12Pictures/step19b_p12.JPG)
+
+5. The Ansible architecture now looks like this:
+
+   ![Pic20](./project12Pictures/step20_p12.JPG)
