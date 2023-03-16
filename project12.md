@@ -142,3 +142,128 @@ Let see **code re-use** in action by importing other playbooks:
 8. Ensure that `wireshark` is deleted on all the servers by running `wireshark --version`.
 
    ![Pic12b](./project12Pictures/step12b_p12.JPG)
+
+
+**STEP 3 - CONFIGURE UAT WEBSERVERS WITH A ROLE 'WEBSERVER'**
+
+configure 2 new Web Servers as `uat`. We could write tasks to configure Web Servers in the same playbook, but it would be too messy, instead, we will use a dedicated `role` to make our configuration reusable.
+
+1. Launch 2 fresh EC2 instances using RHEL 8 image, we will use them as our `uat` servers, so give them names accordingly – `Web1-UAT` and `Web2-UAT`.
+
+2. Create a role by creating a directory called `roles` relative to the playbook file or in /`etc/ansible/ `directory.
+
+   There are two ways how you can create this folder structure:
+
+   - Use an Ansible utility called `ansible-galaxy` inside `ansible-config-mngt/`roles directory (you need to create roles directory upfront)
+
+      ```
+      mkdir roles
+      cd roles
+      ansible-galaxy init webserver
+      ```
+
+   - Create the directory/files structure manually. You can choose either way, but since all the codes are stored in GitHub, it is recommended to create folders and files there rather than locally on `Jenkins-Ansible` server.
+
+   The entire folder structure should look like below, but if you create it manually – you can skip creating `tests`, `files`, and `vars` or remove them if you used `ansible-galaxy`.
+
+   ```
+   └── webserver
+      ├── README.md
+      ├── defaults
+      │   └── main.yml
+      ├── files
+      ├── handlers
+      │   └── main.yml
+      ├── meta
+      │   └── main.yml
+      ├── tasks
+      │   └── main.yml
+      ├── templates
+      ├── tests
+      │   ├── inventory
+      │   └── test.yml
+      └── vars
+         └── main.yml
+   ```
+   After removing unnecessary directories and files, the `roles` structure should look like this:
+
+   ```
+   └── webserver
+      ├── README.md
+      ├── defaults
+      │   └── main.yml
+      ├── handlers
+      │   └── main.yml
+      ├── meta
+      │   └── main.yml
+      ├── tasks
+      │   └── main.yml
+      └── templates
+   ```
+   ![Pic13a](./project12Pictures/step13a_p12.JPG)
+
+3. Update your inventory `ansible-config-mngt/inventory/uat.yml` file with IP addresses of your 2 UAT Web servers.
+
+   ```
+   [uat_webservers]
+   <Web1-UAT-Server-Private-IP-Address> ansible_ssh_user='ec2-user' 
+
+   <Web2-UAT-Server-Private-IP-Address> ansible_ssh_user='ec2-user'
+   ```
+
+   ![Pic13b](./project12Pictures/step13b_p12.JPG)
+
+4. Locate ansible.cfg file via the path `/etc/ansible/ansible.cfg`, uncomment `roles_path` string and provide a full path to the `roles` directory i.e. `roles_path = /home/ubuntu/ansible-config-mngt/roles`, so Ansible could know where to find configured `roles`.
+
+   **Note**: In some cases, the path `/etc/ansible/ansible.cfg` may not exist. You will have to create `ansible` directory and `ansible.cfg` file in `/etc` directory and add the string path to the `roles` directory. 
+
+    ![Pic14a](./project12Pictures/step14a_p12.JPG)
+
+    ![Pic14b](./project12Pictures/step14b_p12.JPG)
+
+5. It is time to start adding some logic to the webserver role. Go into `tasks` directory, and within the `main.yml` file, start writing configuration tasks to do the following:
+   - Install and configure Apache (`httpd` service).
+   - Clone **Tooling website** from GitHub `https://github.com/<your-name>/tooling.git`.
+   - Ensure the tooling website code is deployed to `/var/www/html` on each of 2 UAT Web servers.
+   - Make sure `httpd` service is started.
+
+   The main.yml may consist of following tasks:
+
+   ```py
+   ---
+   - name: install apache
+   become: true
+   ansible.builtin.yum:
+      name: "httpd"
+      state: present
+
+   - name: install git
+   become: true
+   ansible.builtin.yum:
+      name: "git"
+      state: present
+
+   - name: clone a repo
+   become: true
+   ansible.builtin.git:
+      repo: https://github.com/<your-name>/tooling.git
+      dest: /var/www/html
+      force: yes
+
+   - name: copy html content to one level up
+   become: true
+   command: cp -r /var/www/html/html/ /var/www/
+
+   - name: Start service httpd, if not started
+   become: true
+   ansible.builtin.service:
+      name: httpd
+      state: started
+
+   - name: recursively remove /var/www/html/html/ directory
+   become: true
+   ansible.builtin.file:
+      path: /var/www/html/html
+      state: absent
+   ```
+   ![Pic15](./project12Pictures/step15_p12.JPG)
