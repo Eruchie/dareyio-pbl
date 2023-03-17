@@ -146,4 +146,41 @@ Three things to notice here:
 
     f. When you are satisfied with the codes, create a Pull Request and merge it to `main` branch on GitHub.
 
+3. **LOAD BALANCER ROLES**
+
+    Here we will be able to choose which Load Balancer to use, `Nginx` or `Apache`, so we need to have two roles respectively:
     
+    - Nginx
+    - Apache
+
+   With the experience acquired using Ansible so far we can:
+
+    - Decide to develop our own `roles`, or find available ones from the community
+    - Update both `static-assignment` and `site.yml` files to refer the `roles`
+
+    ***Important Hints***:
+
+    - Since both `Nginx` and `Apache` load balancers cannot be used, add a condition to enable either one – *this is where you can make use of variables*.
+
+    - Declare a variable in `defaults`/`main.yml` file inside the `Nginx` and `Apache` roles. Name each variables `enable_nginx_lb` and `enable_apache_lb` respectively.
+
+    - Set both values to `false` like this `enable_nginx_lb: false` and `enable_apache_lb: false`.
+
+    - Declare another variable in both roles `load_balancer_is_required` and set its value to `false` as well.
+
+    - Update both `assignment` and `site.yml` files respectively.
+  
+4. **APACHE AND NGINX ROLE INSTALLATION**
+
+    a. Navigate to ansible galaxy and download `apache` and `nginx` roles by `geerlingguy`.
+
+    b. Copy and install `apache` and `nginx` on `ansible-config-mngt` directory in the bastion host.
+
+    - `ansible-galaxy install geerlingguy.apache`
+
+      ![Pic7a](./project13Pictures/step7a_p13.JPG)
+
+    - `ansible-galaxy install geerlingguy.nginx`
+
+      ![Pic7a](./project13Pictures/step7a_p13.JPG)
+
