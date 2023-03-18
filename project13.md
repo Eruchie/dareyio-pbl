@@ -158,19 +158,7 @@ Three things to notice here:
     - Decide to develop our own `roles`, or find available ones from the community
     - Update both `static-assignment` and `site.yml` files to refer the `roles`
 
-    ***Important Hints***:
-
-    - Since both `Nginx` and `Apache` load balancers cannot be used, add a condition to enable either one – *this is where you can make use of variables*.
-
-    - Declare a variable in `defaults`/`main.yml` file inside the `Nginx` and `Apache` roles. Name each variables `enable_nginx_lb` and `enable_apache_lb` respectively.
-
-    - Set both values to `false` like this `enable_nginx_lb: false` and `enable_apache_lb: false`.
-
-    - Declare another variable in both roles `load_balancer_is_required` and set its value to `false` as well.
-
-    - Update both `assignment` and `site.yml` files respectively.
-  
-4. **APACHE AND NGINX ROLE INSTALLATION**
+4. **INSTALL APACHE AND NGINX ROLES**
 
     a. Navigate to ansible galaxy and download `apache` and `nginx` roles by `geerlingguy`.
 
@@ -182,5 +170,44 @@ Three things to notice here:
 
     - `ansible-galaxy install geerlingguy.nginx`
 
-      ![Pic7a](./project13Pictures/step7a_p13.JPG)
+      ![Pic7b](./project13Pictures/step7b_p13.JPG)
+
+    ***Important Hints***:
+
+    - Since both `Nginx` and `Apache` load balancers cannot be used, add a condition to enable either one – *this is where you can make use of variables*.
+
+    - Declare a variable in `defaults`/`main.yml` file inside the `Nginx` and `Apache` roles. Name each variables `enable_nginx_lb` and `enable_apache_lb` respectively.
+
+    - Set both values to `false` like this `enable_nginx_lb: false` and `enable_apache_lb: false`.
+
+    - Declare another variable in both roles `load_balancer_is_required` and set its value to `false` as well.
+
+      ![Pic8a](./project13Pictures/step8a_p13.JPG)
+
+      ![Pic8b](./project13Pictures/step8b_p13.JPG)
+
+    - Update both `assignment` and `site.yml` files respectively. ***Hint**: Create `loadbalancers.yml` file in `static-assignments` directory.*
+
+      `loadbalancers.yml` file
+
+      ```py
+      - hosts: lb
+        roles:
+          - { role: nginx, when: enable_nginx_lb and load_balancer_is_required }
+          - { role: apache, when: enable_apache_lb and load_balancer_is_required }
+      ```
+      ![Pic9a](./project13Pictures/step9a_p13.JPG)
+
+      `sites.yml` file
+
+      ```
+      - name: Loadbalancers assignment
+            hosts: lb
+              - import_playbook: ../static-assignments/loadbalancers.yml
+              when: load_balancer_is_required
+      ```
+      ![Pic9b](./project13Pictures/step9b_p13.JPG)
+
+  
+
 
