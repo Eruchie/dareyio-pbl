@@ -208,6 +208,6 @@ Three things to notice here:
       ```
       ![Pic9b](./project13Pictures/step9b_p13.JPG)
 
-  
+    - Now make use of `env-vars\uat.yml` file to define which loadbalancer to use in UAT environment by setting respective environmental variable to true.
 
 
